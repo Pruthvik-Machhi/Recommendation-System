@@ -51,3 +51,41 @@ movies['crew'] = movies['crew'].apply(fetch_director)
 #movies['overview'] = movies['overview'].apply(lambda x:x.split())
 movies.sample(5)
 # print(movies)
+def collapse(L):
+    L1 = []
+    for i in L:
+        L1.append(i.replace(" ",""))
+    return L1
+
+movies['cast'] = movies['cast'].apply(collapse)
+movies['crew'] = movies['crew'].apply(collapse)
+movies['genres'] = movies['genres'].apply(collapse)
+movies['keywords'] = movies['keywords'].apply(collapse)
+
+movies.head()
+
+movies['overview'] = movies['overview'].apply(lambda x:x.split())
+
+movies['tags'] = movies['overview'] + movies['genres'] + movies['keywords'] + movies['cast'] + movies['crew']
+
+new = movies.drop(columns=['overview','genres','keywords','cast','crew'])
+#new.head()
+
+new['tags'] = new['tags'].apply(lambda x: " ".join(x))
+# new.head()
+
+from sklearn.feature_extraction.text import CountVectorizer
+cv = CountVectorizer(max_features=5000,stop_words='english')
+    
+
+vector = cv.fit_transform(new['tags']).toarray()
+
+vector.shape
+
+from sklearn.metrics.pairwise import cosine_similarity
+
+similarity = cosine_similarity(vector)
+
+similarity
+
+
