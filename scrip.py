@@ -87,5 +87,14 @@ from sklearn.metrics.pairwise import cosine_similarity
 similarity = cosine_similarity(vector)
 
 similarity
+new[new['title'] == 'Avatar'].index[0]
 
+
+# def recommend(movie):
+index = new[new['title'] == 'Avatar'].index[0]
+distances = sorted(list(enumerate(similarity[index])),reverse=True,key = lambda x: x[1])
+l=[]
+for i in distances[1:6]:
+    x=new.iloc[i[0]].title
+    print(x)
 
