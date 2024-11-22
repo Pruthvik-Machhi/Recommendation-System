@@ -1,6 +1,9 @@
 import streamlit as st
 import pickle
 import pandas as pd
+import numpy as np
+from tensorflow.keras.models import load_model
+import tensorflow_hub as hub
 
 new_movies = pickle.load(open('movie_list.pkl', 'rb'))
 similarity_movies = pickle.load(open('similarity.pkl', 'rb'))
@@ -84,8 +87,6 @@ def main():
     global sentiment_reviews, book_sentiment_reviews
 
     st.title("Recommendation and Sentiment Analysis System")
-
-    # Create a radio button to select between Movie and Book
     option = st.radio("Movie or Book:", ("Movie", "Book"))
 
     if option == "Movie":
