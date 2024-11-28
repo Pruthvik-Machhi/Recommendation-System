@@ -1,14 +1,16 @@
 import pandas as pd
 import streamlit as st
+import os
 
-# Load and merge movie data
 def load_movie_data():
-    credits = pd.read_csv(r'D:\GthubFiles\Recommendation-System\data\tmdb_5000_credits.csv')
-    movies = pd.read_csv(r'D:\GthubFiles\Recommendation-System\data\tmdb_5000_movies.csv')
+    base_path = os.path.join(os.getcwd(), 'data') 
+    credits_path = os.path.join(base_path, 'tmdb_5000_credits.csv')
+    movies_path = os.path.join(base_path, 'tmdb_5000_movies.csv')
+    credits = pd.read_csv(credits_path)
+    movies = pd.read_csv(movies_path)
     movies = movies.merge(credits, on='title')
+    
     return movies
-
-# Extract movie details from the dataset
 def get_movie_details(movies, movie_title):
     movie_data = movies[movies['title'].str.lower() == movie_title.lower()]
     
@@ -37,23 +39,43 @@ def get_movie_details(movies, movie_title):
     else:
         return None
 
-# Extract sentiment analysis for a movie
-def get_movie_sentiment(sentiment_reviews, movie_title):
-    sentiment_result = sentiment_reviews[sentiment_reviews['Movie'].str.lower() == movie_title.lower()]['Sentiment'].values
-    if len(sentiment_result) > 0:
-        review_count = sentiment_reviews[sentiment_reviews['Movie'].str.lower() == movie_title.lower()].shape[0]
-        positive_percentage = (sentiment_reviews[(sentiment_reviews['Movie'].str.lower() == movie_title.lower()) & (sentiment_reviews['Sentiment'] == 'Positive')].shape[0] / review_count) * 100
-        negative_percentage = (sentiment_reviews[(sentiment_reviews['Movie'].str.lower() == movie_title.lower()) & (sentiment_reviews['Sentiment'] == 'Negative')].shape[0] / review_count) * 100
-        other_percentage = 100 - (positive_percentage + negative_percentage)
 
-        average_rating = sentiment_reviews[sentiment_reviews['Movie'].str.lower() == movie_title.lower()]['Rating'].mean()
+import sqlite3
+
+def get_movie_sentiment(movie_title):
+    try:
+        conn = sqlite3.connect("movies_data.db")
+        cursor = conn.cursor()
         
-        return {
-            'review_count': review_count,
-            'positive_percentage': positive_percentage,
-            'negative_percentage': negative_percentage,
-            'other_percentage': other_percentage,
-            'average_rating': average_rating if not pd.isna(average_rating) else None
-        }
-    else:
+        query = """
+        SELECT sentiment, rating
+        FROM reviews
+        WHERE LOWER(movie_title) = LOWER(?)
+        """
+        cursor.execute(query, (movie_title,))
+        reviews = cursor.fetchall()
+        
+        if reviews:
+            review_count = len(reviews)
+            positive_count = sum(1 for review in reviews if review[0] == 'Positive')
+            negative_count = sum(1 for review in reviews if review[0] == 'Negative')
+            positive_percentage = (positive_count / review_count) * 100
+            negative_percentage = (negative_count / review_count) * 100
+            other_percentage = 100 - (positive_percentage + negative_percentage)
+            average_rating = sum(review[1] for review in reviews if review[1] is not None) / review_count
+            
+            return {
+                'review_count': review_count,
+                'positive_percentage': positive_percentage,
+                'negative_percentage': negative_percentage,
+                'other_percentage': other_percentage,
+                'average_rating': average_rating if not pd.isna(average_rating) else None
+            }
+        else:
+            return None
+    except Exception as e:
+        print(f"An error occurred: {e}")
         return None
+    finally:
+        conn.close()
+
