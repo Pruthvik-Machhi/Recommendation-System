@@ -57,6 +57,10 @@ Recommendation system for **books and movies**, built using both **content-based
 
 ## **Recommendation System**  
 
+<p align="center">
+  <img src="screenshots/Screenshot 2024-11-30 190700.png" alt="Screenshot 4">
+</p>
+
 #### **1 Movie Recommendation - Content-Based Approach**  
 The content-based recommendation system for movies uses information about the movies themselves to suggest similar ones. This is achieved by analyzing features like genre, overview, year, cast, director, etc.  
 
@@ -100,6 +104,10 @@ The collaborative filtering system for books relies on **user interaction data**
 All these details are dynamically updated based on user interactions, such as reviews and ratings, using an **integrated SQLite database**.  
 
 ---
+
+<p align="center">
+  <img src="screenshots/Screenshot 2024-11-30 190804.png" alt="Screenshot 4">
+</p>
 
 ## **Sentiment Analysis**  
 Sentiment analysis is used to understand user feedback in the form of reviews and ratings. When users provide reviews for movies or books and rate them, the system performs **sentiment analysis** to classify these reviews as **positive** or **negative**. The results, along with the ratings, are stored in an **SQLite database** to dynamically update the movie details and improve recommendations.  
