@@ -9,7 +9,7 @@ Recommendation system for **books and movies**, built using both **content-based
 - **Sentiment Analysis**: Analyzes user reviews to determine sentiment, which is then used to improve recommendations for individual users.  
 - **Dynamic Updates**: Integrates an SQLite database to store and update user reviews and ratings, ensuring the detailed movie information stays current.   
 
-**Video Demo**: [YouTube Video](https://www.youtube.com/watch?v=9_OgIKGtZY4)  
+## **Video Demo**: [YouTube Video](https://www.youtube.com/watch?v=9_OgIKGtZY4)  
 
 <p align="center">
   <img src="screenshots/Screenshot 2024-11-30 173457.png" alt="Screenshot 1" width="45%">
