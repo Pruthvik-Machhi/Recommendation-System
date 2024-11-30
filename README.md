@@ -1,24 +1,20 @@
 # Recommendation-System
 
-**Overview**
+## Overview
 
-This project is a recommendation system for **books and movies**, built using both **content-based** and **collaborative filtering approaches**. It provides users with personalized recommendations and includes the following features:
+Recommendation system for **books and movies**, built using both **content-based** and **collaborative filtering approaches**. It provides users with personalized recommendations and includes the following features:
 
 - **Detailed Movie Information**: Displays an overview of movies, including genre, release year, cast, director, number of reviews (positive/negative), and average ratings.  
 - **User Interaction**: Allows users to give reviews and ratings directly on the platform.  
 - **Sentiment Analysis**: Analyzes user reviews to determine sentiment, which is then used to improve recommendations for individual users.  
-- **Dynamic Updates**: Integrates an SQLite database to store and update user reviews and ratings, ensuring the detailed movie information stays current.  
+- **Dynamic Updates**: Integrates an SQLite database to store and update user reviews and ratings, ensuring the detailed movie information stays current.   
 
-This project enhances user experience by combining advanced recommendation algorithms with interactive and insightful features.  
-
-**Demo**
+**Video Demo**: [YouTube Video](https://www.youtube.com/watch?v=9_OgIKGtZY4)  
 
 <p align="center">
   <img src="screenshots/Screenshot 2024-11-30 173457.png" alt="Screenshot 1" width="45%">
   <img src="screenshots/Screenshot 2024-11-30 173522.png" alt="Screenshot 2" width="45%">
 </p>
-
-**Video Demo**: [YouTube Video](https://www.youtube.com/watch?v=9_OgIKGtZY4)  
 
 ---
 ## Libraries Used
@@ -51,9 +47,9 @@ This project enhances user experience by combining advanced recommendation algor
     streamlit run app.py
     ```
 
-### **1. Recommendation System**  
+## **Recommendation System**  
 
-#### **1.1 Movie Recommendation - Content-Based Approach**  
+#### **1 Movie Recommendation - Content-Based Approach**  
 The content-based recommendation system for movies uses information about the movies themselves to suggest similar ones. This is achieved by analyzing features like genre, overview, year, cast, director, etc.  
 
 **Working**:  
@@ -61,7 +57,7 @@ The content-based recommendation system for movies uses information about the mo
 2. **Similarity Calculation**: When a user interacts with a movie (e.g., watches or rates it), the system calculates the similarity between that movie and others using metrics like **cosine similarity** or **Euclidean distance**.  
 3. **Recommendation**: Based on the similarity scores, movies most similar to the user's preferences are recommended.  
 
-#### **1.2 Book Recommendation - Collaborative Filtering Approach**  
+#### **2 Book Recommendation - Collaborative Filtering Approach**  
 The collaborative filtering system for books relies on **user interaction data** to generate recommendations. Unlike content-based methods, collaborative filtering focuses on patterns in user behavior.  
 
 **Working**:  
@@ -73,7 +69,7 @@ The collaborative filtering system for books relies on **user interaction data**
 
 ---
 
-### **2. Detail Extraction**  
+## **Detail Extraction**  
 
 #### **Basic Information**:  
 - **Title**: The name of the movie.  
@@ -97,7 +93,7 @@ All these details are dynamically updated based on user interactions, such as re
 
 ---
 
-### **3. Sentiment Analysis**  
+## **Sentiment Analysis**  
 Sentiment analysis is used to understand user feedback in the form of reviews and ratings. When users provide reviews for movies or books and rate them, the system performs **sentiment analysis** to classify these reviews as **positive** or **negative**. The results, along with the ratings, are stored in an **SQLite database** to dynamically update the movie details and improve recommendations.  
 
 #### **Initial Approach: Machine Learning Algorithms**  
