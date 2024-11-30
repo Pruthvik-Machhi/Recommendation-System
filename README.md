@@ -17,6 +17,14 @@ Recommendation system for **books and movies**, built using both **content-based
 </p>
 
 ---
+
+## Working
+
+<p align="center">
+  <img src="screenshots/Screenshot 2024-11-30 185545.png" alt="Screenshot 3">
+</p>
+
+
 ## Libraries Used
 
 - Numpy
