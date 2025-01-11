@@ -1,6 +1,6 @@
 import streamlit as st
-from app.data import movies, books
-import pandas as pd
+# from app.data import movies, books
+# import pandas as pd
 from app.models import recommend_movies, recommend_books, predict_sentiment
 
 from app.streamlit_components import movies_ui, books_ui
